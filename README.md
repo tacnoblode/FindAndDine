@@ -26,6 +26,26 @@ Find & Dine is a mobile app for discovering new restaurants near you and keeping
 - Filter and sort rated restaurants
 - Shareable top restaurants list
 
+## Data Model
+
+The data classes live in `data/model`.
+
+| Class | Purpose |
+| --- | --- |
+| `Restaurant` | A restaurant from the map. Its `id` is the Google Places place ID. A restaurant is saved locally once the user marks it as visited. |
+| `Rating` | The user's personal rating of a visited restaurant: stars (1 to 5), visit date, private note and personal rank. |
+| `RatedRestaurant` | A `Restaurant` paired with its `Rating`, used by the My Ratings list, Detail screen and Top Restaurants screen. |
+| `RatingSortOption` | The sort options for the My Ratings list. |
+
+### Restaurant and Rating relationship
+
+A `Restaurant` has **zero or one** `Rating` (one-to-one, optional):
+
+- A visited restaurant can have no rating yet, or exactly one rating.
+- Every `Rating` belongs to exactly one `Restaurant`, linked by `Rating.restaurantId` → `Restaurant.id`.
+- Visiting a restaurant again updates its existing rating instead of adding a second one.
+
+The star rating and the personal rank are separate. Stars describe how good the restaurant was, while the rank is its position in the user's own list (#1 is their favourite). Two restaurants can have the same number of stars, but never the same rank.
 
 ## Tech Stack
  
