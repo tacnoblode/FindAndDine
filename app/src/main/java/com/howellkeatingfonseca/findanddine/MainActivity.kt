@@ -13,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.rememberNavController
+import com.howellkeatingfonseca.findanddine.navigation.AppNavigation
 import com.howellkeatingfonseca.findanddine.ui.theme.FindAndDineTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,19 +24,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             // Applies the Find & Dine theme to the whole app
             FindAndDineTheme {
-                // Placeholder content until the NavHost is added (issue #8)
+                // Nav Controller controls routing between different screens
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = stringResource(R.string.app_name),
-                            style = MaterialTheme.typography.headlineLarge
-                        )
-                    }
+                    AppNavigation(navController, modifier = Modifier.padding(innerPadding))
                 }
             }
         }
