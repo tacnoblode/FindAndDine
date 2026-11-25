@@ -19,6 +19,12 @@ fun AppNavigation(navController: NavController, modifier: Modifier = Modifier) {
         // TODO: Add the rest of the screens to the navigation list as they're finished
         composable("splash_screen") {
             SplashScreen(
+                onTimeout = {
+                    navController.navigate("home_screen") {
+                        // Remove all the screens up to the home page, including the splash
+                        popUpTo("splash_screen") {inclusive = true}
+                    }
+                },
                 modifier = Modifier
             )
         }
